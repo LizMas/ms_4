@@ -1,0 +1,16 @@
+---
+title: "Milestone 4"
+author: "Liz Masten"
+date: "2/27/2020"
+output: bookdown::pdf_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tinytex)
+library(gt)
+library(bookdown)
+library(stargazer)
+library(tidyverse)
+```
