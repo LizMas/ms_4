@@ -3,6 +3,7 @@ title: "Milestone 4"
 author: "Liz Masten"
 date: "2/27/2020"
 output: bookdown::pdf_document2
+bibliography: ["bib.bib"]
 ---
 
 ```{r setup, include=FALSE}
@@ -13,6 +14,8 @@ library(tinytex)
 library(gt)
 library(bookdown)
 library(stargazer)
+library(bibtex)
+library(yaml)
 library(tidyverse)
 ```
 
@@ -23,8 +26,8 @@ data <- read.dta("fpy_replication_data_jop_2012.dta")
 #This milestone needs to contain: 
 
 #a bibliography (and associated references);
-#a footnote, a table (using the gt package); and 
-#a regression table (using whatever packages you like.
+#a footnote, a table (using the gt package); and        CHECK
+#a regression table (using whatever packages you like.  CHECK
 
 #All of this can be brief (i.e., just two entries in the References is fine) and fake (made up data in the tables).
 ```
@@ -37,15 +40,15 @@ Additionally, please see my GitHub for my <a href = https://github.com/LizMas/re
 #table using gt package 
 
 table <- data %>% 
+  #filter to after 1990 because the table was too big otherwise and I'd never actually do a table like that anyway 
   filter(year >= 1990) %>% 
   select(year, terrorCounts) %>% 
   group_by(year) %>% 
   summarise(events = sum(terrorCounts))
-  
 
 
 gt_table <- gt(table) %>% 
-            tab_header(title = "Title of Table")
+            tab_header(title = "Terror Attacks per Year")
 
 gt_table
 
@@ -73,9 +76,22 @@ model_x <- glm(rivalry ~ terrorCounts, data = x)
 
 stargazer(model_x, header=FALSE, type='latex')
 
+```
+
+
+```{r}
+
+#Google Scholar has a citation feature where you can export the citation as a BibTeX 
+#...which didn't actually save it as a .bib file, but rather as .txt, so that seems promising but didn't work for me this time. 
+
+#So I looked online and found a paper by Jenny Bryant that saved as a .bib 
+
+
 
 ```
 
 
-Here is an example of how to footnote.^[footnote_1] 
-And another one.^[footnote_2]
+Here is an example of how to footnote.^[This is the text of footnote 1] 
+And another one.^[This is the text of footnote 2]
+
+Here is some text that I want to cite in the bibliography [see @bib]
