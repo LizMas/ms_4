@@ -3,7 +3,7 @@ title: "Milestone 4"
 author: "Liz Masten"
 date: "2/27/2020"
 output: bookdown::pdf_document2
-bibliography: ["bib.bib"]
+bibliography: bib.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -16,6 +16,7 @@ library(bookdown)
 library(stargazer)
 library(bibtex)
 library(yaml)
+library(knitcitations)
 library(tidyverse)
 ```
 
@@ -94,4 +95,15 @@ stargazer(model_x, header=FALSE, type='latex')
 Here is an example of how to footnote.^[This is the text of footnote 1] 
 And another one.^[This is the text of footnote 2]
 
-Here is some text that I want to cite in the bibliography [see @bib]
+Here is some text that I want to cite in the bibliography [see @bib.bib]
+
+# References
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "bib.bib")
+
+#ok so this isn't a great working example but the idea is here. 
+```
